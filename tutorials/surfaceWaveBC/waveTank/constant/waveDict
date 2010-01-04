@@ -1,0 +1,45 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.4                                   |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+
+    root            "";
+    case            "";
+    instance        "";
+    local           "";
+
+    class           dictionary;
+    object          waveProperties;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+//# include "initialConditions"
+
+startPoint        	(-150 0 0);
+refU			(2 0 0);
+waveType		regular;
+
+regularCoeffs
+{
+	waveHeight      	height [0 1 0 0 0 0 0] 2;
+	wavePeriod      	T [0 0 1 0 0 0 0] 9;
+	waveTravelDirection	(2 0 0);
+}
+
+irregularCoeffs
+{
+	waveGroupFileName	"constant/waveGroup";
+	spectrum		"JONSWAP";
+	waveTravelDirection	(2 0 0);
+	H_13			1;
+	T1			6.00;	//JONSWAP: T1 = 0.834 * Tp; Tp = 8.4 s
+}
+// ************************************************************************* //

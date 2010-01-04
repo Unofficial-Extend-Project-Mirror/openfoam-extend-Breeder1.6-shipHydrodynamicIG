@@ -1,0 +1,39 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.6                                   |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      cellSetDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Name of set to operate on
+name c0;
+
+// One of clear/new/invert/add/delete|subset/list
+action new;
+
+// Actions to apply to cellSet. These are all the topoSetSource's ending
+// in ..ToCell (see the meshTools library).
+
+topoSetSources
+(
+    // Cells with centre within cylinder
+    cylinderToCell
+    {
+       p1       (-10 0 0); // start point on cylinder axis
+       p2       (-10 1 0);   // end point on cylinder axis
+       radius   5.1;
+    }
+);
+
+
+// ************************************************************************* //

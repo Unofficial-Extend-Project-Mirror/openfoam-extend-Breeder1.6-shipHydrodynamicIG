@@ -1,0 +1,33 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.4                                   |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+
+    root            "";
+    case            "";
+    instance        "";
+    local           "";
+
+    class           dictionary;
+    object          environmentalProperties;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+g               g [0 1 -2 0 0 0 0] (0 0 -9.81);
+depth           depth [0 1 0 0 0 0 0] 21;		//can give runtime errors if not chosen correctly
+seaLevel        seaLevel [0 1 0 0 0 0 0] 0;
+waveHeight      height [0 1 0 0 0 0 0] 0;
+waveNumber      k [0 -1 0 0 0 0 0] 1;
+omega           omega [0 0 -1 0 0 0 0] 1;
+waveType	StokesFirst;
+refU		refU [0 1 -1 0 0 0 0] (5 0 0);
+// ************************************************************************* //

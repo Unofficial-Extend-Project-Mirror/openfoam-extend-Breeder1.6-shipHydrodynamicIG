@@ -1,0 +1,70 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.4                                   |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+
+    root            "";
+    case            "";
+    instance        "";
+    local           "";
+
+    class           dictionary;
+    object          blockMeshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 1;
+
+vertices        
+(
+(-2 -2 -10)	//0
+(2 -2 -10)	//1
+(2 2 -10)	//2
+(-2 2 -10)	//3
+(-2 -2 1)	//4
+(2 -2 1)	//5
+(2 2 1)		//6
+(-2 2 1)	//7
+
+);
+
+blocks          
+(
+    hex (0 1 2 3 4 5 6 7) water (25 25 100) simpleGrading (1 1 1)	//water
+);
+
+edges           
+(
+);
+
+patches         
+//Convention: looking from inside the block towards the patch, the order of vertices must rotate clockwise
+(
+    patch Walls 
+    (
+	(0 4 7 3)
+        (0 3 2 1)
+        (0 1 5 4)
+        (2 3 7 6)
+        (1 2 6 5)
+    )
+    patch Top 
+    (
+	(4 5 6 7)
+    )
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

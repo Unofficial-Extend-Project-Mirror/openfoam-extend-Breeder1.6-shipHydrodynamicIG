@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+runApplication blockMesh
+runApplication snappyHexMesh -overwrite
+cat constant/polyMesh/boundary | sed 's/Hull.*/Hull/' > constant/polyMesh/boundary2
+rm constant/polyMesh/boundary
+mv constant/polyMesh/boundary2 constant/polyMesh/boundary
+
+cp 0/alpha1.org~ 0/alpha1
+runApplication setFields
+runApplication shipFoam
+runApplication foamToVTK
+
+
+# -----------------------------------------------------------------------------

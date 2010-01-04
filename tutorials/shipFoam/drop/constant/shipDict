@@ -1,0 +1,63 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.5                                   |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      shipDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+startUpdate     		2;
+weightFactor    		(1 2 1);
+springCoeffUpdateInterval	10;
+
+//writing of additional text file with motion path of CoG
+writeCoG			yes;
+writeInterval			5;
+
+bodies
+{
+	Hull
+	{
+	aMax            	10;
+
+	CoG             	(0 0 0.4);
+	bodyRotation		(0 0 0);	//rotation of motion patch local coordinate system in degrees
+	
+	//Translation parameters
+	calcTranslationDOF 	(0 0 1);
+	initialVelocity		(0 0 -1);
+	constantForce		(0 0 0);
+	mass            	70;
+	linearDamping   	(0 0 0 );
+	linearSpring    	(0 0 0);
+	
+	//Rotation parameters
+	calcRotationDOF 	(0 0 0);
+	initialRotationSpeed	(0 0 0);
+	constantMoment		(0 0 0);
+	momentOfInertia 	(5 5 5);
+	linearDamping_rot 	(0 0 0);
+	linearSpring_rot 	(0 0 0);
+	}
+
+}
+
+//Parameters for Ordinary Differential Equations
+ODECoeffs       
+{
+    ODESolver       	RK;
+    eps             	0.0001;
+    hEst            	0.5;
+}
+
+
+// ************************************************************************* //

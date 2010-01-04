@@ -1,0 +1,119 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.4.1                                 |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+// FoamX Case Dictionary.
+
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+
+    root            "/home/caelinux/OpenFOAM/caelinux-1.4.1/run/STu1606";
+    case            "STu1606_FS_2";
+    instance        "system";
+    local           "";
+
+    class           dictionary;
+    object          fvSolution;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    pcorr           PCG 
+    {
+        tolerance       1e-06;
+        relTol          0;
+        preconditioner  GAMG 
+        {
+            tolerance       1e-06;
+            relTol          0;
+            smoother        DICGaussSeidel;
+            nCellsInCoarsestLevel 10;
+            mergeLevels     1;
+            agglomerator    faceAreaPair;
+            cacheAgglomeration false;
+            nPreSweeps      0;
+            nPostSweeps     2;
+            nFinestSweeps   2;
+            scaleCorrection true;
+            directSolveCoarsest false;
+        };
+    };
+    p              GAMG 
+    {
+        tolerance       1e-06;
+        relTol          0;
+        smoother        DIC;
+        nCellsInCoarsestLevel 10;
+        mergeLevels     1;
+        agglomerator    faceAreaPair;
+        cacheAgglomeration true;
+        nPreSweeps      0;
+        nPostSweeps     2;
+        nFinestSweeps   2;
+        scaleCorrection true;
+        directSolveCoarsest false;
+    };
+    pFinal         PCG 
+    {
+        tolerance       1e-06;
+        relTol          0;
+        preconditioner  GAMG 
+        {
+            tolerance       1e-06;
+            relTol          0;
+            smoother        DICGaussSeidel;
+            nCellsInCoarsestLevel 10;
+            mergeLevels     1;
+            agglomerator    faceAreaPair;
+            cacheAgglomeration true;
+            nPreSweeps      2;
+            nPostSweeps     2;
+            nFinestSweeps   2;
+            scaleCorrection true;
+            directSolveCoarsest false;
+        };
+    };
+
+    U               smoothSolver 
+    {
+        tolerance       1e-06;
+        relTol          0;
+        smoother        GaussSeidel;
+        nSweeps         1;
+    };
+
+    cellMotionU		 PCG
+    {
+        preconditioner   DIC;
+        tolerance        1e-05;
+        relTol           0;
+    };
+
+}
+
+PISO
+{
+    momentumPredictor yes;
+    nCorrectors     3;
+    nNonOrthogonalCorrectors 1;
+    nAlphaCorr      2;
+    nAlphaSubCycles 1;
+    cAlpha          1;
+    pRefCell	    0;
+    pRefValue	    0;
+}
+relaxationFactors
+{
+	p	0.2;
+	U	0.8;
+}
+
+// ************************************************************************* //

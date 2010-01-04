@@ -1,0 +1,4 @@
+wclean
+cd genWaveGroupData
+wclean
+cd ..

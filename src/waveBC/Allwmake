@@ -1,0 +1,4 @@
+wmake libso
+cd genWaveGroupData
+wmake
+cd ..

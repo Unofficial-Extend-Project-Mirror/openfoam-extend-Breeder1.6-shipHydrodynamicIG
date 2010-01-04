@@ -1,0 +1,133 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.5                                   |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      shipDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+startUpdate     		3;
+weightFactor    		( 1 2 1 );
+springCoeffUpdateInterval	1000000;
+//writing of additional text file with motion path of CoG
+writeCoG		no;
+writeInterval		2;
+
+bodies
+{
+	Heavy
+	{
+	aMax            	10;
+
+	CoG             	( 0 0 -3);
+	bodyRotation		(0 0 0);	//rotation of motion patch local coordinate system in degrees
+	
+	//Translation parameters
+	calcTranslationDOF 	(1 0 0);
+	initialVelocity		(0 0 0);
+	constantForce		(0 0 0);
+	mass            	2000;
+	linearDamping   	(0 0 0 );
+	linearSpring    	(0 0 10000000);	
+	
+	//Rotation parameters
+	calcRotationDOF 	( 0 0 0 );
+	initialRotationSpeed	(0 0 0);
+	constantMoment		(0 0 0);
+	momentOfInertia 	(0 0 0);
+	linearDamping_rot 	(0 0 0);
+	linearSpring_rot 	(0 0 0);
+	}
+
+	Light
+	{
+	aMax            	10;
+
+	CoG             	(0 0 -7);
+	bodyRotation		(0 0 0);	//rotation of motion patch local coordinate system in degrees
+	
+	//Translation parameters
+	calcTranslationDOF 	(1 0 0);
+	initialVelocity		(0 0 0);
+	constantForce		(0 0 0);
+	mass            	200;
+	linearDamping   	(0 0 0);
+	linearSpring    	(0 0 10000000);
+	
+	//Rotation parameters
+	calcRotationDOF 	(0 0 0);
+	initialRotationSpeed	(0 0 0);
+	constantMoment		(0 0 0);
+	momentOfInertia 	(0 0 0);
+	linearDamping_rot 	(0 0 0);
+	linearSpring_rot 	(0 0 0);
+	}
+
+	Walls
+	{
+	aMax            	10;
+
+	CoG             	(0 0 -5);
+	bodyRotation		(0 0 0);	//rotation of motion patch local coordinate system in degrees
+	
+	//Translation parameters
+	calcTranslationDOF 	(1 0 0);
+	initialVelocity		(0 0 0);
+	constantForce		(320000 0 0);
+	mass            	160000;
+	linearDamping   	(0 0 0);
+	linearSpring    	(0 0 0);
+	
+	//Rotation parameters
+	calcRotationDOF 	(0 0 0);
+	initialRotationSpeed	(0 0 0);
+	constantMoment		(0 0 0);
+	momentOfInertia 	(0 0 0);
+	linearDamping_rot 	(0 0 0);
+	linearSpring_rot 	(0 0 0);
+	}
+	Top
+	{
+	aMax            	10;
+
+	CoG             	(0 0 -5);
+	bodyRotation		(0 0 0);	//rotation of motion patch local coordinate system in degrees
+	
+	//Translation parameters
+	calcTranslationDOF 	(1 0 0);
+	initialVelocity		(0 0 0);
+	constantForce		(1 0 0);
+	mass            	1;
+	linearDamping   	(0 0 0);
+	linearSpring    	(0 0 0);
+	
+	//Rotation parameters
+	calcRotationDOF 	(0 0 0);
+	initialRotationSpeed	(0 0 0);
+	constantMoment		(0 0 0);
+	momentOfInertia 	(0 0 0);
+	linearDamping_rot 	(0 0 0);
+	linearSpring_rot 	(0 0 0);
+	}
+
+}
+
+//Parameters for Ordinary Differential Equations
+ODECoeffs       
+{
+    ODESolver       	RK;
+    eps             	0.0001;
+    hEst            	0.5;
+}
+
+
+// ************************************************************************* //

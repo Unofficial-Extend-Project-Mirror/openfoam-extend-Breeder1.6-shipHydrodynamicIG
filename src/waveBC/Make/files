@@ -1,0 +1,3 @@
+surfaceWaveVelocityFvPatchVectorField.C
+
+LIB = $(FOAM_USER_LIBBIN)/libBoundaryConditions
